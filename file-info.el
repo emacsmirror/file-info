@@ -5,7 +5,7 @@
 ;; Author: Artur Yaroshenko <artawower@protonmail.com>
 ;; URL: https://github.com/artawower/file-info.el
 ;; Package-Requires: ((emacs "28.1") (hydra "0.15.0") (browse-at-remote "0.15.0"))
-;; Version: 0.10.0
+;; Version: 0.11.0
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -462,11 +462,7 @@
   "Get project related path (dired-aware)."
   (when-let ((file-name (file-info--current-file))
              (root (file-info--get-project-root)))
-    (concat
-     (replace-regexp-in-string
-      " "
-      "\\\\\  "
-      (file-relative-name file-name root)))))
+    (file-relative-name file-name root)))
 
 (defun file-info--get-headline (text)
   "Return headline for TEXT."
@@ -507,9 +503,7 @@ Otherwise return `buffer-file-name'."
 (defun file-info--get-file-dir ()
   "Return directory of current file (dired-aware)."
   (when-let ((f (file-info--current-file)))
-    (replace-regexp-in-string
-     " " "\\\\\ \ "
-     (file-name-directory f))))
+    (file-name-directory f)))
 
 (defun file-info--get-file-name ()
   "Get file name."
